@@ -8964,7 +8964,9 @@ a.text-dark:focus, a.text-dark:hover {
 .invisible {
     visibility: hidden !important;
 }
-
+.hidenbox {
+    display: none !important;
+}
 @media print {
     *, ::after, ::before {
         text-shadow: none !important;
