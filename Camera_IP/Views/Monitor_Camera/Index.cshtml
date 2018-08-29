@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layout.cshtml";
+    var number_camera = 8;
 }
 
 @section jstest{
@@ -13,11 +14,13 @@
             <label class="control-label" style="padding-top: 5px">Số lượng camera muốn xem</label>
             <div class="col-lg-2">
                 <select class="form-control" id="select_num_camera">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    @{
+                        for(var i=1; i<=number_camera; i++)
+                        {
+                        <option value="@i">@i</option>
+                            } 
+                        }
+
                 </select>
             </div>
             <button class="btn btn-success" id="number_camera">Chọn</button>
@@ -32,10 +35,10 @@
                     <div>
                         <h3 class="title-5 m-b-10">Camera 1<br><small>&nbsp169.254.252.253</small></h3>
                         <div>
-                            <img style="width: 250px;" class="img-responsive" src="http://169.254.252.253/nphMotionJpeg?Resolution=192x144&Quality=Standard" />
+                            <video style="width: 250px;" class="img-responsive" src="http://169.254.252.253/nphMotionJpeg?Resolution=192x144&Quality=Standard" />
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                    <button id="btn-box0" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                         Toàn màn hình
                     </button>
                 </div>
@@ -50,6 +53,9 @@
                             </video>
                         </div>
                     </div>
+                    <button id="btn-box1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
                 </div>
             </div>
             <div class="col-lg-4 hidenbox" id="box2">
@@ -60,6 +66,9 @@
                             <img class="img-responsive" src="http://169.254.205.253/nphMotionJpeg?Resolution=192x144&Quality=Clarity">
                         </div>
                     </div>
+                    <button id="btn-box2" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
                 </div>
             </div>
             <div class="col-lg-4 hidenbox" id="box3">
@@ -70,6 +79,9 @@
                             <img class="img-responsive" src="http://169.254.205.253/nphMotionJpeg?Resolution=192x144&Quality=Clarity">
                         </div>
                     </div>
+                    <button id="btn-box3" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
                 </div>
             </div>
             <div class="col-lg-4 hidenbox" id="box4">
@@ -80,6 +92,48 @@
                             <img class="img-responsive" src="http://169.254.205.253/nphMotionJpeg?Resolution=192x144&Quality=Clarity">
                         </div>
                     </div>
+                    <button id="btn-box4" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 hidenbox" id="box5">
+                <div class="au-card">
+                    <div>
+                        <h3 class="title-5 m-b-10">Camera 6<br><small>&nbsp</small></h3>
+                        <div>
+                            <img class="img-responsive" src="http://169.254.205.253/nphMotionJpeg?Resolution=192x144&Quality=Clarity">
+                        </div>
+                    </div>
+                    <button id="btn-box5" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 hidenbox" id="box6">
+                <div class="au-card">
+                    <div>
+                        <h3 class="title-5 m-b-10">Camera 7<br><small>&nbsp</small></h3>
+                        <div>
+                            <img class="img-responsive" src="http://169.254.205.253/nphMotionJpeg?Resolution=192x144&Quality=Clarity">
+                        </div>
+                    </div>
+                    <button id="btn-box6" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 hidenbox" id="box7">
+                <div class="au-card">
+                    <div>
+                        <h3 class="title-5 m-b-10">Camera 8<br><small>&nbsp</small></h3>
+                        <div>
+                            <img class="img-responsive" src="http://169.254.205.253/nphMotionJpeg?Resolution=192x144&Quality=Clarity">
+                        </div>
+                    </div>
+                    <button id="btn-box7" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        Toàn màn hình
+                    </button>
                 </div>
             </div>
         </div>
@@ -87,24 +141,46 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="myModal"">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title">Theo dõi camera phóng to</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                Modal body..
+                <div class="row">
+                    <div id="view_camera" class="col-lg-9">
+
+                    </div>
+                    <div id="control_camera" class="col-lg-3">
+                        <p><h5>Điều khiển camera</h5></p>
+                        <br />
+
+                        <p style="text-align: center"><button id="control_up"><i class="fa fa-arrow-up"></i></button></p>
+                        <br />
+
+                        <p style="height: 26px;">
+                            <button id="control_left" style="float: left;"><i class="fa fa-arrow-left"></i></button>
+                            <button id="control_right" style="float: right;"><i class="fa fa-arrow-right"></i></button>
+                        </p>
+                        <br />
+
+                        <p style="text-align: center"><button id="control_down"><i class="fa fa-arrow-down"></i></button></p>
+                        <br>
+                    </div>
+                </div>
+               
+                
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
             </div>
 
         </div>

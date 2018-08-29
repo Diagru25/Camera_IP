@@ -5266,6 +5266,8 @@ button.close {
     width: auto;
     margin: .5rem;
     pointer-events: none;
+    /*chi phuc vu cho phong to camera*/
+    max-width: 56% !important;
 }
 
 .modal.fade .modal-dialog {
