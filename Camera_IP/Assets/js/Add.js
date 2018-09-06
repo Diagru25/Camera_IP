@@ -1,4 +1,10 @@
-﻿$('#payment-button').off('click').on('click', function () {
+﻿
+$(document).ready(function () {
+    $('ul').children().removeClass('active');
+    $('#a_manage').parent().addClass('active');
+})
+
+$('#payment-button-add').off('click').on('click', function () {
     var ten = $('#cc-pament').val();
     var diachi_ip = $('#cc-exp').val();
     var cong = $('#x_card_code').val();
@@ -19,6 +25,9 @@
             else {
                 alert('Thêm không thành công');
             }
+        },
+        complete: function(){
+            window.location.href = '/Manage/Index';
         },
         error: function () {
             alert('error: 500 internal server');

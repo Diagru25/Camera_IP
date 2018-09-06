@@ -1,10 +1,12 @@
-﻿chỉnh thêm camera trong trường hợp file xml null
+﻿chỉnh thêm camera trong trường hợp file xml null (done)
 validate dữ liệu
-chỉnh lại các khung trong theo dõi camera cho khoảng cách (trên - dưới) đều nhau
-chỉnh lại số lượng camera bắt đầu từ 0
-chỉnh lại class active ở left menu khi click
-thêm xác nhận khi xóa camera
-chuyển thành chọn combo khi chọn loại camera
-đổi màu button sửa camera
-(có thể) gộp file add.js vs edit.js làm 1
+chỉnh lại các khung trong theo dõi camera cho khoảng cách (trên - dưới) đều nhau (done)
+chỉnh lại số lượng camera bắt đầu từ 0 (done)
+chỉnh lại class active ở left menu khi click (done)
+thêm xác nhận khi xóa camera (done)
+chuyển thành chọn combo khi chọn loại camera (done)
+đổi màu button sửa camera (done)
+(có thể) gộp file add.js vs edit.js làm 1 (done)
 (có thế) chỉnh lại kích thước của modal full màn hình (to ra)
+sửa lại js khi click hiển thị box ẩn (done)
+sửa lại js hiện toàn màn hình (done)

@@ -1,38 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <document>
   <camera>
-    <ID>2</ID>
-    <ten>Camera 2</ten>
-    <diachi_ip>192.168.10.0</diachi_ip>
+    <ID>1</ID>
+    <ten>cam 1</ten>
+    <diachi_ip>192.168.45.0</diachi_ip>
     <cong>8080</cong>
-    <vitri>H3</vitri>
+    <vitri>H2</vitri>
     <loai>Webcam</loai>
     <trangthai>Online</trangthai>
   </camera>
   <camera>
+    <ID>2</ID>
+    <ten>23</ten>
+    <diachi_ip>192.168.52.30</diachi_ip>
+    <cong>8080</cong>
+    <vitri>G5</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+  </camera>
+  <camera>
     <ID>3</ID>
-    <ten>Camera 3</ten>
-    <diachi_ip>10.30.131.61</diachi_ip>
+    <ten>cam 2</ten>
+    <diachi_ip>13.20.52.4</diachi_ip>
     <cong>8080</cong>
-    <vitri>H3</vitri>
-    <loai>SmartPhone</loai>
-    <trangthai>Online</trangthai>
-  </camera>
-  <camera>
-    <ID>5</ID>
-    <ten>camera 6</ten>
-    <diachi_ip>192.168.45.52</diachi_ip>
-    <cong>8080</cong>
-    <vitri>H9</vitri>
-    <loai>SmartPhone</loai>
-    <trangthai>Online</trangthai>
-  </camera>
-  <camera>
-    <ID>10</ID>
-    <ten>camera 8</ten>
-    <diachi_ip>123.3.23.12</diachi_ip>
-    <cong>8080</cong>
-    <vitri>D3</vitri>
+    <vitri>K0</vitri>
     <loai>SmartPhone</loai>
     <trangthai>Online</trangthai>
   </camera>

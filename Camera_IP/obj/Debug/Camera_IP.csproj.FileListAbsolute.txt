@@ -147,3 +147,4 @@ C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\bin\zh-cn\ZedGraph.resou
 C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\bin\zh-tw\ZedGraph.resources.dll
 C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\obj\Debug\Camera_IP.dll
 C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\obj\Debug\Camera_IP.pdb
+C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\obj\Debug\Camera_IP.csprojResolveAssemblyReference.cache

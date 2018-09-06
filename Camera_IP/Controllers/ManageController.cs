@@ -14,7 +14,7 @@ namespace Camera_IP.Controllers
 
         static string path = @"C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\Assets\data\XMLFile1.xml";
 
-        List<camera> list = new List<camera>();
+        static List<camera> list = new List<camera>();
 
         // load file xml
         XmlDocument xmlDoc = new XmlDocument();
@@ -22,6 +22,9 @@ namespace Camera_IP.Controllers
         // GET: Manage
         public ActionResult Index()
         {
+
+            list.Clear();
+
             xmlDoc.Load(path);
             XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/document/camera");
 
@@ -57,7 +60,6 @@ namespace Camera_IP.Controllers
             }
             return View(list);
         }
-
         [HttpGet]
         public ActionResult Add_Camera()
         {
@@ -74,10 +76,11 @@ namespace Camera_IP.Controllers
 
                 XmlNode add_camera = xmlDoc.CreateNode(XmlNodeType.Element, "camera", null);
 
-                //var a = list.Max(t => t.ID);
-                //string id = a.ToString();
+                int a = list.Count > 0 ? list.Max(t => t.ID) + 1 : 1;
+                string id = a.ToString();
+
                 XmlNode _ID = xmlDoc.CreateElement("ID");
-                _ID.InnerText = "10";
+                _ID.InnerText = id;
                 XmlNode _ten = xmlDoc.CreateElement("ten");
                 _ten.InnerText = ten;
                 XmlNode _diachi_ip = xmlDoc.CreateElement("diachi_ip");
