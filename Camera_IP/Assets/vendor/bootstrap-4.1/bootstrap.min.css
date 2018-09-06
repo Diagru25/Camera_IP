@@ -8969,6 +8969,11 @@ a.text-dark:focus, a.text-dark:hover {
 .hidenbox {
     display: none !important;
 }
+.fixstyle {
+    width: 250px;
+    height: 188px;
+    margin-bottom: 8px;
+}
 @media print {
     *, ::after, ::before {
         text-shadow: none !important;

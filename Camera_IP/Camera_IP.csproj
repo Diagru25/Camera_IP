@@ -131,6 +131,9 @@
   <ItemGroup>
     <Content Include="Assets\css\font-face.css" />
     <Content Include="Assets\css\theme.css" />
+    <Content Include="Assets\data\XMLFile1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Assets\fonts\poppins\poppins-v5-latin-100.svg" />
     <Content Include="Assets\fonts\poppins\poppins-v5-latin-100italic.svg" />
     <Content Include="Assets\fonts\poppins\poppins-v5-latin-200.svg" />
@@ -163,7 +166,10 @@
     <Content Include="Assets\images\icon\logo-white.png" />
     <Content Include="Assets\images\icon\logo.png" />
     <Content Include="Assets\images\icon\Untitled-1.jpg" />
+    <Content Include="Assets\js\Add.js" />
+    <Content Include="Assets\js\Edit.js" />
     <Content Include="Assets\js\main.js" />
+    <Content Include="Assets\js\manage.js" />
     <Content Include="Assets\js\test.js" />
     <Content Include="Assets\vendor\animsition\animsition.min.css" />
     <Content Include="Assets\vendor\animsition\animsition.min.js" />
@@ -243,6 +249,7 @@
     <Content Include="Assets\vendor\vector-map\jqvmap.min.css" />
     <Content Include="Assets\vendor\wow\animate.css" />
     <Content Include="Assets\vendor\wow\wow.min.js" />
+    <Content Include="GhiChu.txt" />
     <Content Include="Global.asax" />
     <Content Include="License-LGPL.txt" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
@@ -251,10 +258,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Monitor_CameraController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\camera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +379,9 @@
     <Content Include="Assets\vendor\slick\slick-theme.scss" />
     <Content Include="Assets\vendor\slick\slick.less" />
     <Content Include="Assets\vendor\slick\slick.scss" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\Add_Camera.cshtml" />
+    <Content Include="Views\Manage\Edit_Camera.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -379,7 +391,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

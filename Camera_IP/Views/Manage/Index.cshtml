@@ -1,0 +1,64 @@
+﻿@model List<Camera_IP.Models.camera>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@section jsManage{
+    <script src="~/Assets/js/manage.js"></script>
+}
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive table--no-card m-b-30">
+                    <table class="table table-borderless table-striped">
+                        <thead style="background-color: #333; color:#FFF">
+                            <tr>
+                                <th>Camera</th>
+                                <th>Địa chỉ IP</th>
+                                <th>Cổng kết nối</th>
+                                <th class="text-right">Vị trí</th>
+                                <th class="text-right">Loại</th>
+                                <th class="text-right">Trạng thái</th>
+                                <th class="text-middle">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ten</td>
+                                    <td>@item.diachi_ip</td>
+                                    <td>@item.cong</td>
+                                    <td class="text-right">@item.vitri</td>
+                                    <td class="text-right">@item.loai</td>
+                                    <td class="text-right">@item.trangthai</td>
+                                    <td>
+                                        <a role="button" class="btn btn-success btn-sm btn_edit" data-id="@item.ID" href="/Manage/Edit_Camera/@item.ID">
+                                            <i class="fa fa-cogs"></i> Cấu hình
+                                        </a>
+                                        <button class="btn btn-danger btn-sm btn_delete" data-id="@item.ID">
+                                            <i class="fa fa-ban"></i> Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div style="padding-left:14px; ">
+                <a role="button" href="/Manage/Add_Camera" class="btn btn-primary btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> Thêm camera
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

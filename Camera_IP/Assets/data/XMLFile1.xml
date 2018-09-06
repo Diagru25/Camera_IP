@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document>
+  <camera>
+    <ID>2</ID>
+    <ten>Camera 2</ten>
+    <diachi_ip>192.168.10.0</diachi_ip>
+    <cong>8080</cong>
+    <vitri>H3</vitri>
+    <loai>Webcam</loai>
+    <trangthai>Online</trangthai>
+  </camera>
+  <camera>
+    <ID>3</ID>
+    <ten>Camera 3</ten>
+    <diachi_ip>10.30.131.61</diachi_ip>
+    <cong>8080</cong>
+    <vitri>H3</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+  </camera>
+  <camera>
+    <ID>5</ID>
+    <ten>camera 6</ten>
+    <diachi_ip>192.168.45.52</diachi_ip>
+    <cong>8080</cong>
+    <vitri>H9</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+  </camera>
+  <camera>
+    <ID>10</ID>
+    <ten>camera 8</ten>
+    <diachi_ip>123.3.23.12</diachi_ip>
+    <cong>8080</cong>
+    <vitri>D3</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+  </camera>
+</document>
