@@ -18,7 +18,7 @@
                             <h3 class="text-center title-2">Cấu hình camera trong hệ thống</h3>
                         </div>
                         <hr>
-                        <form action="" method="post" novalidate="novalidate">
+                        <div>
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Tên camera</label>
                                 <input id="cc-pament" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="@Model.ten">
@@ -30,16 +30,17 @@
                                         <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="@Model.diachi_ip" data-val="true" data-val-required="Please enter the card expiration"
                                                data-val-cc-exp="Please enter a valid month and year" placeholder="192.168.152.120"
                                                autocomplete="cc-exp">
-                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                        <span id="text_ip" class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <label for="x_card_code" class="control-label mb-1">Cổng kết nôi</label>
-                                    <div class="input-group">
+                                    <div class="form-group">
+                                        <label for="x_card_code" class="control-label mb-1">Cổng kết nôi</label>
                                         <input id="x_card_code" name="x_card_code" class="form-control cc-cvc" placeholder="8080" data-val="true" data-val-required="Please enter the security code"
-                                               data-val-cc-cvc="Please enter a valid security code" autocomplete="off" value="@Model.cong">
-
+                                                   data-val-cc-cvc="Please enter a valid security code" autocomplete="off" value="@Model.cong">
+                                        <span id="text_port" class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="form-group has-success">
@@ -65,7 +66,7 @@
                                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

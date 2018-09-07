@@ -27,4 +27,13 @@
     <loai>SmartPhone</loai>
     <trangthai>Online</trangthai>
   </camera>
+  <camera>
+    <ID>7</ID>
+    <ten>cam 7</ten>
+    <diachi_ip>12.12.12.254</diachi_ip>
+    <cong>9090</cong>
+    <vitri>GG5</vitri>
+    <loai>Panasonic</loai>
+    <trangthai>Online</trangthai>
+  </camera>
 </document>
