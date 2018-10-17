@@ -1,0 +1,2258 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>xZune.Vlc</name>
+    </assembly>
+    <members>
+        <member name="T:xZune.Vlc.Interop.Core.AddInterface">
+            <summary>
+            尝试启动一个用户接口,用于 LibVlc 实例
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="name">接口名,为 NULL 则为默认</param>
+            <returns>如果成功会返回 0 ,否则会返回 -1</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.GetAudioFilterList">
+            <summary>
+            获取可用的音频过滤器
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <returns>可用音频过滤器列表指针,这是一个 <see cref="T:xZune.Vlc.Interop.Core.ModuleDescription"/> 类型的指针</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Free">
+            <summary>
+            释放由 LibVlc 函数返回的指针资源,其作用类似于 C语言 中的 free() 函数
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.GetChangeset">
+            <summary>
+            获取 LibVlc 的变更集(?)
+            </summary>
+            <returns>返回 LibVlc 的变更集,类似于 "aa9bce0bc4"</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.GetCompiler">
+            <summary>
+            获取 LibVlc 的编译器信息
+            </summary>
+            <returns>返回 LibVlc 的编译器信息</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.GetVersion">
+            <summary>
+            获取 LibVlc 的版本信息
+            </summary>
+            <returns>返回 LibVlc 的版本信息,类似于 "1.1.0-git The Luggage"</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.ReleaseLibVlcModuleDescription">
+            <summary>
+            释放 <see cref="T:xZune.Vlc.Interop.Core.ModuleDescription"/> 的资源
+            </summary>
+            <param name="moduleDescription">资源指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.NewInstance">
+            <summary>
+            创建并初始化一个 LibVlc 实例,并提供相应的参数,这些参数和命令行提供的参数类似,会影响到 LibVlc 实例的默认配置.
+            有效参数的列表取决于 LibVlc 版本,操作系统,可用 LibVlc 插件和平台.无效或不支持的参数会导致实例创建失败
+            </summary>
+            <param name="argsCount">参数个数</param>
+            <param name="argv">参数列表</param>
+            <returns>返回 LibVlc 实例指针,如果出错将返回 NULL</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.ReleaseInstance">
+            <summary>
+            递减 LibVlc 实例的引用计数,如果它达到零,将会释放这个实例
+            </summary>
+            <param name="instance">需要释放的 LibVlc 实例指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.RetainInstance">
+            <summary>
+            递增 LibVlc 实例的引用计数,当调用 NewInstance 初始化成功时,引用计数将初始化为1
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.SetAppId">
+            <summary>
+            设置一些元信息关于该应用程序
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="id">Java 风格的应用标识符,类似于 "com.acme.foobar"</param>
+            <param name="version">应用程序版本,类似于 "1.2.3"</param>
+            <param name="icon">应用程序图标,类似于 "foobar"</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.SetExitHandler">
+            <summary>
+            为 LibVlc 设置一个回调,该回调将会在 LibVlc 退出时被调用,不能与 <see cref="T:xZune.Vlc.Interop.Core.Wait"/> 一起使用.
+            而且,这个函数应该在播放一个列表或者开始一个用户接口前被调用,否则可能导致 LibVlc 在注册该回调前退出
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="handler">函数指针,这是一个参数为 void*,无返回值的函数指针</param>
+            <param name="arg">数据指针,将做为参数传递给回调函数</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.SetUserAgent">
+            <summary>
+            设置一个用户代理字符串,当一个协议需要它的时候,LibVlc 将会提供该字符串
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="name">应用程序名称,类似于 "FooBar player 1.2.3",实际上只要能标识应用程序,任何字符串都是可以的</param>
+            <param name="http">HTTP 用户代理,类似于 "FooBar/1.2.3 Python/2.6.0"</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.GetVideoFilterList">
+            <summary>
+            获取可用的视频过滤器
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <returns>可用视频过滤器列表指针,这是一个 <see cref="T:xZune.Vlc.Interop.Core.ModuleDescription"/> 类型的指针</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Wait">
+            <summary>
+            等待,直到一个接口导致 LibVlc 实例退出为止,在使用之前,应该使用 <see cref="T:xZune.Vlc.Interop.Core.AddInterface"/> 添加至少一个用户接口.
+            实际上这个方法只会导致一个线程阻塞,建议使用 <see cref="T:xZune.Vlc.Interop.Core.SetExitHandler"/>
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.ModuleDescription">
+            <summary>
+            对一个 LibVlc 的模块的说明
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.ModuleDescription.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.ModuleDescription.ShortName">
+            <summary>
+            短名称
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.ModuleDescription.LongName">
+            <summary>
+            长名称
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.ModuleDescription.Help">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.ModuleDescription.Next">
+            <summary>
+            下一个模块,这是一个 <see cref="T:xZune.Vlc.Interop.Core.ModuleDescription"/> 指针
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Error.ErrorMessage">
+            <summary>
+            获取一个可读的 LibVlc 错误信息
+            </summary>
+            <returns>返回一个可读的 LibVlc 错误信息,如果没有错误信息将返回 NULL</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Error.CleanError">
+            <summary>
+            清除当前线程的 LibVlc 的错误信息
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Events.EventAttach">
+            <summary>
+            为一个事件通知注册一个回调
+            </summary>
+            <param name="manager">事件管理器</param>
+            <param name="type">事件类型</param>
+            <param name="callback">回调</param>
+            <param name="userData">由用户定义的数据</param>
+            <returns>0代表成功,12代表出错</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Events.EventDetach">
+            <summary>
+            为一个事件通知取消注册一个回调
+            </summary>
+            <param name="manager">事件管理器</param>
+            <param name="type">事件类型</param>
+            <param name="callback">回调</param>
+            <param name="userData">由用户定义的数据</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Events.GetTypeName">
+            <summary>
+            获取事件类型名称
+            </summary>
+            <param name="type">事件类型</param>
+            <returns>返回事件类型名称</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Events.LibVlcEventCallBack">
+            <summary>
+            表示一个 LibVlc 的事件回调代理
+            </summary>
+            <param name="eventArgs">事件参数</param>
+            <param name="userData">用户数据指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Core.Events.EventTypes">
+            <summary>
+            事件类型
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaMetaChanged">
+            <summary>
+            媒体元数据改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaSubItemAdded">
+            <summary>
+            媒体的子项被添加
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaDurationChanged">
+            <summary>
+            媒体时长改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaParsedChanged">
+            <summary>
+            媒体解析状态被改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaFreed">
+            <summary>
+            媒体被释放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaStateChanged">
+            <summary>
+            媒体状态改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerMediaChanged">
+            <summary>
+            媒体播放器的媒体被改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerOpening">
+            <summary>
+            媒体播放器正在打开媒体
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerBuffering">
+            <summary>
+            媒体播放器正在缓冲媒体
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerPlaying">
+            <summary>
+            媒体播放器正在播放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerPaused">
+            <summary>
+            媒体播放器被暂停
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerStopped">
+            <summary>
+            媒体播放器被停止播放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerForward">
+            <summary>
+            媒体播放器前进
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerBackward">
+            <summary>
+            媒体播放器后退
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerEndReached">
+            <summary>
+            媒体播放器结束播放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerEncounteredError">
+            <summary>
+            媒体播放器遇到错误
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerTimeChanged">
+            <summary>
+            媒体播放器时间改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerPositionChanged">
+            <summary>
+            媒体播放器进度改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerSeekableChanged">
+            <summary>
+            媒体播放器是否允许寻址被改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerPausableChanged">
+            <summary>
+            媒体播放器是否允许被暂停被改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerTitleChanged">
+            <summary>
+            媒体播放器标题被改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerSnapshotTaken">
+            <summary>
+            媒体播放器捕获一个快照
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerLengthChanged">
+            <summary>
+            媒体播放器长度改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaPlayerVideoOutChanged">
+            <summary>
+            媒体播放器视频输出改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListItemAdded">
+            <summary>
+            一个项被添加到媒体列表
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListWillAddItem">
+            <summary>
+            一个项将被添加到媒体列表
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListItemDeleted">
+            <summary>
+            一个项从媒体列表移除
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListWillDeleteItem">
+            <summary>
+            一个项将从媒体列表移除
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListViewItemAdded">
+            <summary>
+            一个项被添加到媒体列表视图
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListViewWillAddItem">
+            <summary>
+            一个项将被添加到媒体列表视图
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListViewItemDeleted">
+            <summary>
+            一个项从媒体列表视图移除
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListViewWillDeleteItem">
+            <summary>
+            一个项将从媒体列表视图移除
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListPlayerPlayed">
+            <summary>
+            媒体列表播放器开始播放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListPlayerNextItemSet">
+            <summary>
+            媒体列表播放器跳到下个项
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaListPlayerStopped">
+            <summary>
+            媒体列表播放器停止
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaDiscovererStarted">
+            <summary>
+            媒体搜寻器开始搜寻
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.MediaDiscovererEnded">
+            <summary>
+            媒体搜寻器搜寻结束
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaAdded">
+            <summary>
+            一个 VLM 媒体被添加
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaRemoved">
+            <summary>
+            一个 VLM 媒体被移除
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaChanged">
+            <summary>
+            一个 VLM 媒体被改变
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStarted">
+            <summary>
+            一个 VLM 媒体实例开始
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStopped">
+            <summary>
+            一个 VLM 媒体实例停止
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStatusInit">
+            <summary>
+            一个 VLM 媒体实例被初始化
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStatusOpening">
+            <summary>
+            一个 VLM 媒体实例正在打开
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStatusPlaying">
+            <summary>
+            一个 VLM 媒体实例正在播放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStatusPause">
+            <summary>
+            一个 VLM 媒体实例被暂停
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStatusEnd">
+            <summary>
+            一个 VLM 媒体实例结束播放
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Core.Events.EventTypes.VlmMediaInstanceStatusError">
+            <summary>
+            一个 VLM 媒体实例出现错误
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.MediaAddOption">
+            <summary>
+            向一个媒体添加一个选项,这个选项将会确定媒体播放器将如何读取介质,
+            </summary>
+            <param name="media">一个媒体指针</param>
+            <param name="options"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.MediaAddOptionFlag">
+            <summary>
+            向一个媒体通过可配置的标志添加一个选项,这个选项将会确定媒体播放器将如何读取介质,
+            </summary>
+            <param name="media">一个媒体指针</param>
+            <param name="options"></param>
+            <param name="flags"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.MediaDuplicate">
+            <summary>
+            复制一个媒体对象
+            </summary>
+            <param name="media">要被复制的媒体对象</param>
+            <returns>复制的媒体对象</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetEventManager">
+            <summary>
+            获取媒体对象的事件管理器,该函数不会增加引用计数
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>返回媒体对象的事件管理器</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetCodecDescription">
+            <summary>
+            获取媒体的基本编码器的说明
+            </summary>
+            <param name="type">由 <see cref="F:xZune.Vlc.Interop.Media.MediaTrack.Type"/> 得来</param>
+            <param name="codec">由 <see cref="F:xZune.Vlc.Interop.Media.MediaTrack.Codec"/> 得来</param>
+            <returns>返回媒体的基本编码器的说明</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetDuration">
+            <summary>
+            获取媒体的时间长度
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>返回媒体的时间长度</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetMeta">
+            <summary>
+            获取媒体的某个元属性,如果尚未解析元属性,将会返回 NULL.
+            这个方法会自动调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMediaAsync"/> 方法,所以你在之后应该会收到一个 MediaMetaChanged 事件.
+            如果你喜欢同步版本,可以在 GetMeta 之前调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMedia"/> 方法
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="type">元属性类型</param>
+            <returns>返回媒体的某个元属性</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetMrl">
+            <summary>
+            获取该媒体的媒体资源地址
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>返回该媒体的媒体资源地址</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetState">
+            <summary>
+            获取媒体当前状态
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>返回媒体当前状态</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetStats">
+            <summary>
+            获取媒体当前统计
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="stats">统计结构体指针,指向 <seealso cref="T:xZune.Vlc.Interop.Media.MediaStats"/></param>
+            <returns>如果成功会返回 true ,否则会返回 false</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetTracksInfo">
+            <summary>
+            获取媒体的基本流的描述,注意,在调用该方法之前你需要首先调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMedia"/> 方法,或者至少播放一次.
+            否则,你将的得到一个空数组
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="tracks">一个 <see cref="T:xZune.Vlc.Interop.Media.MediaTrackInfo"/> 数组</param>
+            <returns>数组的元素个数</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetUserData">
+            <summary>
+            获取由用户定义的媒体数据
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>返回由用户定义的媒体数据指针</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.IsParsed">
+            <summary>
+            获取一个值表示该媒体是否已经解析
+            </summary>
+            <param name="media">LibVlc 实例指针</param>
+            <returns>True 表示已经解析,False 表示尚未被解析</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.CreateMediaAsNewNode">
+            <summary>
+            创建一个具有名字的媒体作为一个空节点
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="name">名字</param>
+            <returns>创建的媒体对象指针</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.CreateMediaFromFileDescriptor">
+            <summary>
+            通过给定的文件描述符创建一个媒体,该文件描述符必须具有 Read 访问权限.
+            LibVlc 不会关闭任何文件描述符,尽管如此,一般一个媒体描述符只能在媒体播放器中使用一次,如果你想复用,需要使用 lseek 函数将文件描述符的文件指针倒回开头
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="fileDescriptor">文件描述符</param>
+            <returns>创建的媒体对象指针,发送错误时会返回 NULL</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.CreateMediaFromLocation">
+            <summary>
+            通过给定的文件 Url 创建一个媒体,该 Url 的格式必须以 "file://" 开头,参见 "RFC3986".
+            对于打开本地媒体,其实我们更推荐使用 <see cref="T:xZune.Vlc.Interop.Media.CreateMediaFromPath"/>
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="url">媒体的文件 Url</param>
+            <returns>创建的媒体对象指针,发送错误时会返回 NULL</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.CreateMediaFromPath">
+            <summary>
+            通过给定的文件路径创建一个媒体
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <param name="path">媒体文件路径</param>
+            <returns>创建的媒体对象指针,发送错误时会返回 NULL</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.ParseMedia">
+            <summary>
+            解析一个媒体,获取媒体的元数据和轨道信息
+            </summary>
+            <param name="media">媒体对象指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.ParseMediaAsync">
+            <summary>
+            异步解析一个媒体,获取媒体的元数据和轨道信息,这是 <see cref="T:xZune.Vlc.Interop.Media.ParseMedia"/> 的异步版本,
+            解析完成会触发 MediaParsedChanged 事件,您可以跟踪该事件
+            </summary>
+            <param name="media">媒体对象指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.ParseMediaWithOptionAsync">
+            <summary>
+            根据提供的标志异步解析一个媒体,获取媒体的元数据和轨道信息,这是 <see cref="T:xZune.Vlc.Interop.Media.ParseMediaAsync"/> 的高级版本,
+            默认情况下解析一个本地文件,解析完成会触发 MediaParsedChanged 事件,您可以跟踪该事件
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="flag">提供的解析标志</param>
+            <returns>成功解析会返回 0,否则会返回 -1</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.ReleaseMedia">
+            <summary>
+            递减媒体对象的引用计数,如果它达到零,将会释放这个实例
+            </summary>
+            <param name="media">媒体对象指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.RetainMedia">
+            <summary>
+            递增媒体对象的引用计数
+            </summary>
+            <param name="media">媒体对象指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.SaveMeta">
+            <summary>
+            保存当前的元数据到媒体
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>如果操作成功将会返回 True</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.SetMeta">
+            <summary>
+            设置媒体的元数据
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="type">元数据类型</param>
+            <param name="data">元数据值</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.SetUserData">
+            <summary>
+            设置媒体的由用户定义的数据
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="userData">用户定义的数据</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetSubitems">
+            <summary>
+            获取媒体对象的子对象列表,这将增加引用计数,使用 <see cref="!:Interop.MediaList.ReleaseMediaList"/> 来减少引用计数
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>返回媒体对象的子对象列表</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.GetTracks">
+            <summary>
+            获取媒体的基本流的描述,注意,在调用该方法之前你需要首先调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMedia"/> 方法,或者至少播放一次.
+            否则,你将的得到一个空数组
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <param name="tracks">一个 <see cref="T:xZune.Vlc.Interop.Media.MediaTrack"/> 数组的数组</param>
+            <returns>返回媒体的基本流的描述</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Media.ReleaseTracks">
+            <summary>
+            释放一个媒体的基本流的描述的数组
+            </summary>
+            <param name="tracks">基本流的描述的数组</param>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.MediaTrackInfo.ChannelsOrHeight">
+            <summary>
+            表示音频的通道数或者视频的帧高
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.MediaTrackInfo.RateOrWidth">
+            <summary>
+            表示音频的速率或者视频的帧宽
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.AudioTrack.Channels">
+            <summary>
+            表示音频的通道数
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.AudioTrack.Rate">
+            <summary>
+            表示音频的速率
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.VideoTrack.Height">
+            <summary>
+            表示视频的帧高
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.VideoTrack.Width">
+            <summary>
+            表示视频的帧宽
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.Media.MediaTrack.Track">
+            <summary>
+            表示一个 Track 的具体指针,该指针可能指向 <see cref="T:xZune.Vlc.Interop.Media.VideoTrack"/>,<see cref="T:xZune.Vlc.Interop.Media.AudioTrack"/> 或者 <see cref="T:xZune.Vlc.Interop.Media.SubtitleTrack"/>,根据 Type 的值不同,Track 的指向数据也可能不同
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.ToggleMute">
+            <summary>
+            切换音频静音状态
+            </summary>
+            <param name="mediaPlayer"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetMute">
+            <summary>
+            获取音频静音状态
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns>0为正常,1为静音,-1为未定义</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetMute">
+            <summary>
+            设置音频静音状态
+            </summary>
+            <param name="mediaPlayer"></param>
+            <param name="status"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetVolume">
+            <summary>
+            获取音频音量
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns>0~100之间</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetVolume">
+            <summary>
+            设置音频音量
+            </summary>
+            <param name="mediaPlayer"></param>
+            <param name="volume">0~100之间</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetOutputChannel">
+            <summary>
+            获取音频输出通道
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetOutputChannel">
+            <summary>
+            设置音频输出通道
+            </summary>
+            <param name="mediaPlayer"></param>
+            <param name="channel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetAudioTrackCount">
+            <summary>
+            获取音频轨道数
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetAudioTrack">
+            <summary>
+            获取当前音轨
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetAudioTrack">
+            <summary>
+            设置当前音轨
+            </summary>
+            <param name="mediaPlayer"></param>
+            <param name="track"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetAudioTrackDescription">
+            <summary>
+            获取音轨描述
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.TrackDescription">
+            <summary>
+            表示一个视频,音频,或者文本的描述
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.MediaPlayer.TrackDescription.Next">
+            <summary>
+            这是一个 <see cref="T:xZune.Vlc.Interop.MediaPlayer.TrackDescription"/> 类型的指针,指向下一个描述
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.MediaPlayer.AudioOutput.Next">
+            <summary>
+            这是一个 <see cref="T:xZune.Vlc.Interop.MediaPlayer.AudioOutput"/> 类型的指针,指向下一个音频输出
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.MediaPlayer.AudioOutputDevice.Next">
+            <summary>
+            这是一个 <see cref="T:xZune.Vlc.Interop.MediaPlayer.AudioOutputDevice"/> 类型的指针,指向下一个音频输出设备
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.MediaPlayer.AudioOutputDevice.Device">
+            <summary>
+            设备标识符
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Interop.MediaPlayer.AudioOutputDevice.Description">
+            <summary>
+            设备描述
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.VideoMarqueeOption">
+            <summary>
+            视频字幕设定项
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.VideoLockCallback">
+            <summary>
+            当锁定图像缓存时,调用此回调.
+            每当一个新帧需要被解码,都会调用此回调,一个或者三个像素平面会被通过第二个参数返回.这些像素屏幕需要 32 字节对齐
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="planes">像素平面</param>
+            <returns>一个私有指针用来显示或解锁回调用来识别图像缓存</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.VideoUnlockCallback">
+            <summary>
+            当解锁图像缓存时,调用此回调.
+            每当一个帧被解码完成,都会调用此回调,该回调并不是必须的,但是它是读取像素值的唯一的途径.
+            该回调会发生在图片解码之后,显示之前
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="picture">由 <see cref="T:xZune.Vlc.Interop.MediaPlayer.VideoLockCallback"/> 返回的指针</param>
+            <param name="planes">像素平面</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.VideoDisplayCallback">
+            <summary>
+            当显示图像时,调用此回调.
+            每当一个帧需要被显示时,都会调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="picture">由 <see cref="T:xZune.Vlc.Interop.MediaPlayer.VideoLockCallback"/> 返回的指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.VideoFormatCallback">
+            <summary>
+            当配置图像缓存格式时,调用此回调.
+            此回调会获取由解码器和过滤器(如果有)输出的视频的格式,
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="chroma">视频格式识别码</param>
+            <param name="width">像素宽</param>
+            <param name="height">像素高</param>
+            <param name="pitches">每个像素平面字节的扫描线间距</param>
+            <param name="lines">每个像素平面的扫描线的个数</param>
+            <returns>分配的图片缓存大小,0代表失败</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.VideoCleanupCallback">
+            <summary>
+            配置图片缓存格式时,调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioPlayCallback">
+            <summary>
+            音频播放时,调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="sample">采样数据</param>
+            <param name="count">采样数</param>
+            <param name="pts">预计播放时间戳</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioPauseCallback">
+            <summary>
+            音频暂停时,调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="pts">请求暂停的时间戳</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioResumeCallback">
+            <summary>
+            音频继续播放时,调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="pts">请求继续的时间戳</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioFlushCallback">
+            <summary>
+            音频缓冲刷新时,调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="pts"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioDrainCallback">
+             <summary>
+            
+             </summary>
+             <param name="opaque"></param>
+             <param name="pts"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioSetupCallback">
+            <summary>
+            音频格式完成配置时调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="format">格式字符串,一个四字符的字符串</param>
+            <param name="rate">采样率</param>
+            <param name="channels">通道数</param>
+            <returns>0代表成功</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioCheanupCallback">
+             <summary>
+            
+             </summary>
+             <param name="opaque"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.AudioSetVolumeCallback">
+            <summary>
+            音频设置音量时,调用此回调
+            </summary>
+            <param name="opaque">一个私有指针</param>
+            <param name="volume">音量</param>
+            <param name="mute">是否为静音</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.CreateMediaPlayer">
+            <summary>
+            创建一个空的媒体播放器对象
+            </summary>
+            <param name="instance">LibVlc 实例指针</param>
+            <returns>创建好的媒体播放器对象指针</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.CreateMediaPlayerFromMedia">
+            <summary>
+            通过一个媒体对象创建一个媒体播放器对象
+            </summary>
+            <param name="media">媒体对象指针</param>
+            <returns>创建好的媒体播放器对象指针</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.ReleaseMediaPlayer">
+            <summary>
+            递减媒体播放器对象的引用计数,如果它达到零,将会释放这个实例
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.RetainMediaPlayer">
+            <summary>
+            递增媒体播放器对象的引用计数
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetMedia">
+            <summary>
+            为媒体播放器设置媒体
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="media">媒体对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetMedia">
+            <summary>
+            获取媒体播放器的媒体
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>媒体对象</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetEventManager">
+            <summary>
+            获取媒体播放器对象的事件管理器,该函数不会增加引用计数
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>返回媒体播放器对象的事件管理器</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.IsPlaying">
+            <summary>
+            获取媒体播放器对象是否正在播放
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>如果播放器对象正在播放则返回 True ,否则返回 Flase</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.Play">
+            <summary>
+            使媒体播放器开始播放
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>0代表成功,-1代表失败</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetPause">
+            <summary>
+            设置媒体播放器播放或者暂停,如果没有设置媒体对象,将会没有作用
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="pause">true 代表暂停,false 代表播放或继续</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetPosition">
+            <summary>
+            设置媒体播放器的进度,如果后台播放未启用将会没有作用,根据底层的输入格式和协议,可能导致无法正常播放
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="pos">播放进度,取值为0.0~1.0</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.Stop">
+            <summary>
+            停止媒体播放器的播放,如果没有设置媒体将会没有作用
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetVideoCallback">
+            <summary>
+            设置 Video 的事件回调
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="lockCallback">Lock 事件回调,必须</param>
+            <param name="unlockCallback">Unlock 事件回调</param>
+            <param name="displayCallback">Display 事件回调</param>
+            <param name="userData">回调用用户数据</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetVideoFormat">
+            <summary>
+            设置 Video 解码格式
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="chroma">视频格式识别码,一个四个字符的识别码</param>
+            <param name="width">像素宽</param>
+            <param name="height">像素高</param>
+            <param name="pitch">扫描线</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetVideoFormatCallback">
+            <summary>
+            设置 Video 解码格式回调
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="formatCallback"></param>
+            <param name="cleanupCallback"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetHwnd">
+            <summary>
+            为媒体播放器设置一个视频输出句柄,将会在该句柄上绘图
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="hwnd">句柄</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetHwnd">
+            <summary>
+            获取为媒体播放器设置的视频输出句柄
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>句柄</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetAudioCallback">
+            <summary>
+            设置 Audio 的事件回调
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="playCallback"></param>
+            <param name="pauseCallback"></param>
+            <param name="resumeCallback"></param>
+            <param name="flushCallback"></param>
+            <param name="drainCallback"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetAudioFormat">
+            <summary>
+            设置 Audio 的格式
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="format">格式字符串,一个四字符的字符串</param>
+            <param name="rate">采样率</param>
+            <param name="channels">通道数</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetAudioFormatCallback">
+            <summary>
+            设置 Audio 的格式回调
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="setupCallback"></param>
+            <param name="cheanupCallback"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetAudioVolumeCallback">
+             <summary>
+            
+             </summary>
+             <param name="mediaPlayer">媒体播放器对象</param>
+             <param name="volumeCallback"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetLength">
+            <summary>
+            获取媒体的长度,以毫秒为单位
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>-1为未设置媒体</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetTime">
+            <summary>
+            获取目前的媒体进度,以毫秒为单位
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>-1为未设置媒体</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetTime">
+            <summary>
+            设置目前的媒体进度,以毫秒为单位
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="time">播放进度</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetPosition">
+            <summary>
+            获取当前媒体进度,0~1范围
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetChapter">
+            <summary>
+            设置当前媒体播放器的章节
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="chapter">章节</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetChapter">
+            <summary>
+            获取当前媒体播放器的章节
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>-1代表没有设置媒体</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetChapterCount">
+            <summary>
+            获取当前媒体播放器的章节数
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns>-1代表没有设置媒体</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.CanPlay">
+            <summary>
+            获取当前媒体播放器是否处于可播放
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetTitleChapterCount">
+            <summary>
+            获取标题的章节数
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="title">标题</param>
+            <returns>-1代表没有设置媒体</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetTitle">
+            <summary>
+            设置媒体播放器的标题
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="title"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetTitle">
+            <summary>
+            获取媒体播放器的标题
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetTitleCount">
+            <summary>
+            获取媒体播放器的标题数
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.PreviousChapter">
+            <summary>
+            上一个章节
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.NextChapter">
+            <summary>
+            下一个章节
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetRate">
+            <summary>
+            获取媒体速率
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetRate">
+            <summary>
+            设置媒体是速率
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="rate"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetState">
+            <summary>
+            获取媒体的状态
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetFps">
+            <summary>
+            获取媒体的FPS
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.HasVout">
+            <summary>
+            获取该媒体播放器视频输出的个数
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.IsSeekable">
+            <summary>
+            获取该媒体是否能够跳进度
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.CanPause">
+            <summary>
+            获取该媒体是否能够暂停
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.NextFrame">
+            <summary>
+            播放下一帧
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.Navigate">
+            <summary>
+            导航DVD菜单
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="navigate"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetVideoTitleDisplay">
+            <summary>
+            设置播放器播放视频时显示视频标题
+            </summary>
+            <param name="mediaPlayer">媒体播放器对象</param>
+            <param name="pos"></param>
+            <param name="timeout"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.ReleaseTrackDescription">
+            <summary>
+            释放 TrackDescriptionList 资源
+            </summary>
+            <param name="track"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetVideoTrackCount">
+            <summary>
+            获取视频轨道数
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetVideoTrack">
+            <summary>
+            获取当前视频轨
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.SetVideoTrack">
+            <summary>
+            设置当前视频轨
+            </summary>
+            <param name="mediaPlayer"></param>
+            <param name="track"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.MediaPlayer.GetVideoTrackDescription">
+            <summary>
+            获取视频轨描述
+            </summary>
+            <param name="mediaPlayer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Time.Clock">
+            <summary>
+            获取由 LibVlc 定义的当前时间
+            </summary>
+            <returns>返回由 LibVlc 定义的当前时间</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.Time.Delay">
+            <summary>
+            获取与提供的时间戳之间的延迟
+            </summary>
+            <param name="timestamp">时间戳</param>
+            <returns>返回与提供的时间戳之间的延迟</returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.Releaseinstance">
+            <summary>
+            释放给定的 LibVlc 的实例相关的 VLM 实例
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.NewBroadCastInput">
+            <summary>
+            添加广播和一个输入
+            </summary>
+            <param name="instance">VLM 实例指针</param>
+            <param name="broadcastName">广播名</param>
+            <param name="inputMRL">输入媒体资源地址</param>
+            <param name="outputMRl">输出媒体资源地址</param>
+            <param name="options"></param>
+            <param name="stringOptions"></param>
+            <param name="boolNewBorodcast">设置一个值允许打开新的新的广播</param>
+            <param name="ifLoopBroadcast">是否广播循环播放</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.NewVodInput">
+            <summary>
+            添加视频点播和一个输入
+            </summary>
+            <param name="instance">VLM 实例指针</param>
+            <param name="mediaWork"></param>
+            <param name="MRLinput"></param>
+            <param name="numberOptions"></param>
+            <param name="addOptions"></param>
+            <param name="boolNewVod"></param>
+            <param name="vodMuxer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.DelBoroadcastOrOvd">
+            <summary>
+            删除媒体(视频点播或广播)
+            </summary>
+            <param name="instance">VLM 实例指针</param>
+            <param name="delBroadcastName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.MediaSwitch">
+            <summary>
+            启用或禁用媒体(视频点播或广播)
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaWork"></param>
+            <param name="boolNewBorodcast"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.SetMediaOutput">
+            <summary>
+            设置媒体输出
+            </summary>
+            <param name="instance">VLM 实例指针</param>
+            <param name="broadcastWork"></param>
+            <param name="outputMRl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.SetMediaInput">
+            <summary>
+            设置媒体的 MRL 输入
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaWork"></param>
+            <param name="inputMRl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.AddMediaInput">
+            <summary>
+            增加一个媒体的 MRL 输入
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaWork"></param>
+            <param name="inputMRl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.SetMediaLoop">
+            <summary>
+            设置媒体循环状态
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaWork"></param>
+            <param name="newStatus">媒体新的状态</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.SetVodMuxer">
+            <summary>
+            设置媒体的 Vod Muxer
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaWork"></param>
+            <param name="newMuxer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.EditMediaParas">
+            <summary>
+            编辑媒体参数
+            </summary>
+            <param name="instance"></param>
+            <param name="newBroadcastName"></param>
+            <param name="inPutMRL"></param>
+            <param name="outPutMRL"></param>
+            <param name="numberOptains"></param>
+            <param name="addOptains"></param>
+            <param name="boolNewBroadcast"></param>
+            <param name="ifLoopBroadcast"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.PlayNamedBroadcast">
+            <summary>
+            播放指定媒体
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName">指定的媒体的名字</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.StopNamedBroadcast">
+            <summary>
+            停止指定的媒体
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName">指定的媒体的名字</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.PauseNamedBroadcast">
+            <summary>
+            暂停指定的媒体
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName">指定的媒体的名字</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.SeekInNamedBroadcast">
+            <summary>
+            在指定的广播中寻找
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName">指定的媒体的名字</param>
+            <param name="seekPercent">寻找进度的百分比数值</param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.ReturnJosnMessage">
+            <summary>
+            以 JOSN 字符串的形式返回一个关于媒体的信息
+            </summary>
+            <param name="instance"></param>
+            <param name="namedMediaName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.GetMediaPosition">
+            <summary>
+            通过名称或 ID 获取媒体实例的位置
+            </summary>
+            <param name="instance"></param>
+            <param name="MediaName"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.GetMediaTime">
+            <summary>
+            通过名称或 ID 获取媒体实例的时间
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.GetMediaLength">
+            <summary>
+            通过名称或 ID 获取媒体实例的长度
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.GetMediaBackRate">
+            <summary>
+            通过名称或 ID 获取媒体实例的退率
+            </summary>
+            <param name="instance"></param>
+            <param name="mediaName"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:xZune.Vlc.Interop.VLM.GetMediaEventManager">
+            <summary>
+            从 Vim Media 中得到 Libvlc 事件管理器
+            </summary>
+            <param name="libvlcInstance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:xZune.Vlc.Interop.LibVlcFunction`1.#ctor(System.IntPtr)">
+            <summary>
+            使用提供的 LibVlc 库句柄初始化一个 LibVlcFunction,不指定库版本
+            </summary>
+            <param name="libHandle">提供的 LibVlc 库句柄</param>
+        </member>
+        <member name="M:xZune.Vlc.Interop.LibVlcFunction`1.#ctor(System.IntPtr,System.Version,System.String)">
+            <summary>
+            使用提供的指定版本的 LibVlc 库句柄初始化一个 LibVlcFunction
+            </summary>
+            <param name="libHandle">提供的 LibVlc 库句柄</param>
+            <param name="libVersion">库版本</param>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunction`1.IsEnable">
+            <summary>
+            获取一个值,该值指示该 <see cref="T:xZune.Vlc.Interop.LibVlcFunction`1"/> 是否正确载入,并且可用
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunction`1.FunctionName">
+            <summary>
+            获取一个字符串,表示该函数在 LibVlc 中的名称,类似于 "libvlc_get_version"
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunction`1.Delegate">
+            <summary>
+            获取当前该 LibVlcFunction 的委托,当 IsEnable 属性为 False 时会抛出异常
+            </summary>
+        </member>
+        <member name="T:xZune.Vlc.Interop.LibVlcFunctionAttribute">
+            <summary>
+            为 LibVlc 函数委托初始化提供必要的信息
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunctionAttribute.FunctionName">
+            <summary>
+            获取一个值,表示函数在 LibVlc 中的名称
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunctionAttribute.MinVersion">
+            <summary>
+            获取一个值,表示支持该函数的最小 LibVlc 版本
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunctionAttribute.MaxVersion">
+            <summary>
+            获取一个值,表示支持该函数的最大 LibVlc 版本
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Interop.LibVlcFunctionAttribute.Dev">
+            <summary>
+            获取一个值,表示特定的开发版本
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Interop.LibVlcFunctionAttribute.#ctor(System.String)">
+            <summary>
+            指定该委托在 LibVlc 中的函数名,不限定 LibVlc 的版本
+            </summary>
+            <param name="functionName">函数名</param>
+        </member>
+        <member name="M:xZune.Vlc.Interop.LibVlcFunctionAttribute.#ctor(System.String,System.String)">
+            <summary>
+            指定该委托在 LibVlc 中的函数名,并要求不低于指定版本的 LibVlc
+            </summary>
+            <param name="functionName">函数名</param>
+            <param name="minVersion">最低支持的 LibVlc</param>
+        </member>
+        <member name="M:xZune.Vlc.Interop.LibVlcFunctionAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            指定该委托在 LibVlc 中的函数名,并要求不低于指定版本的 LibVlc,也不高于指定的最大版本
+            </summary>
+            <param name="functionName">函数名</param>
+            <param name="minVersion">最低支持的 LibVlc</param>
+            <param name="maxVersion">最高支持的 LibVlc</param>
+        </member>
+        <member name="M:xZune.Vlc.Interop.LibVlcFunctionAttribute.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            指定该委托在 LibVlc 中的函数名,并要求不低于指定版本的 LibVlc,也不高于指定的最大版本
+            </summary>
+            <param name="functionName">函数名</param>
+            <param name="minVersion">最低支持的 LibVlc</param>
+            <param name="maxVersion">最高支持的 LibVlc</param>
+            <param name="dev">特定支持的 LibVlc 开发版本</param>
+        </member>
+        <member name="M:xZune.Vlc.ModuleDescription.#ctor(System.IntPtr)">
+            <summary>
+            通过指针来初始化 ModuleDescription
+            </summary>
+            <param name="pointer">提供的指针</param>
+        </member>
+        <member name="P:xZune.Vlc.ModuleDescription.Pointer">
+            <summary>
+            获取这个 ModuleDescription 的指针
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.ModuleDescription.Items">
+            <summary>
+            获取这个 ModuleDescription 包含的子项
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.ModuleDescription.Count">
+            <summary>
+            获取这个 ModuleDescription 包含的子项的个数
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.ModuleDescription.Dispose">
+            <summary>
+            释放当前的 ModuleDescription 资源
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.TrackDescription.#ctor(System.IntPtr)">
+            <summary>
+            通过指针来初始化 TrackDescription
+            </summary>
+            <param name="pointer">提供的指针</param>
+        </member>
+        <member name="P:xZune.Vlc.TrackDescription.Pointer">
+            <summary>
+            获取这个 TrackDescription 的指针
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.TrackDescription.Items">
+            <summary>
+            获取这个 TrackDescription 包含的子项
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.TrackDescription.Count">
+            <summary>
+            获取这个 TrackDescription 包含的子项的个数
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.TrackDescription.Dispose">
+            <summary>
+            释放当前的 ModuleDescription 资源
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._newInstanceFunction">
+            <summary>
+            创建并初始化一个 LibVlc 实例,并提供相应的参数,这些参数和命令行提供的参数类似,会影响到 LibVlc 实例的默认配置.
+            有效参数的列表取决于 LibVlc 版本,操作系统,可用 LibVlc 插件和平台.无效或不支持的参数会导致实例创建失败
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._releaseInstanceFunction">
+            <summary>
+            递减 LibVlc 实例的引用计数,如果它达到零,将会释放这个实例
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._retainInstanceFunction">
+            <summary>
+            递增 LibVlc 实例的引用计数,当调用 NewInstance 初始化成功时,引用计数将初始化为1
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._addInterfaceFunction">
+            <summary>
+            尝试启动一个用户接口,用于 LibVlc 实例
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._setExitHandlerFunction">
+            <summary>
+            为 LibVlc 设置一个回调,该回调将会在 LibVlc 退出时被调用,不能与 <see cref="M:xZune.Vlc.Vlc.Wait"/> 一起使用.
+            而且,这个函数应该在播放一个列表或者开始一个用户接口前被调用,否则可能导致 LibVlc 在注册该回调前退出
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._waitFunction">
+            <summary>
+            等待,直到一个接口导致 LibVlc 实例退出为止,在使用之前,应该使用 <see cref="M:xZune.Vlc.Vlc.AddInterface(System.String)"/> 添加至少一个用户接口.
+            实际上这个方法只会导致一个线程阻塞,建议使用 <see cref="M:xZune.Vlc.Vlc.SetExitHandler(xZune.Vlc.Interop.Core.ExitHandler,System.IntPtr)"/>
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._setUserAgentFunction">
+            <summary>
+            设置一个用户代理字符串,当一个协议需要它的时候,LibVlc 将会提供该字符串
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._setAppIdFunction">
+            <summary>
+            设置一些元信息关于该应用程序
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._getVersionFunction">
+            <summary>
+            获取 LibVlc 的版本信息
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._getCompilerFunction">
+            <summary>
+            获取 LibVlc 的编译器信息
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._getChangesetFunction">
+            <summary>
+            获取 LibVlc 的变更集(?)
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._freeFunction">
+            <summary>
+            释放由 LibVlc 函数返回的指针资源,其作用类似于 C语言 中的 free() 函数
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._releaseLibVlcModuleDescriptionFunction">
+            <summary>
+            释放 <see cref="T:xZune.Vlc.ModuleDescription"/> 的资源
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._getAudioFilterListFunction">
+            <summary>
+            获取可用的音频过滤器
+            </summary>
+        </member>
+        <member name="F:xZune.Vlc.Vlc._getVideoFilterListFunction">
+            <summary>
+            获取可用的视频过滤器
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.#ctor">
+            <summary>
+            使用默认的参数初始化一个 Vlc 实例
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.#ctor(System.String[])">
+            <summary>
+            提供指定的参数初始化一个 Vlc 实例
+            </summary>
+            <param name="argv"></param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.Dispose">
+            <summary>
+            释放当前 Vlc 资源
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Vlc.IsLibLoaded">
+            <summary>
+            获取一个值,该值指示当前模块是否被载入
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Vlc.LibHandle">
+            <summary>
+            获取载入的 LibVlc 库句柄
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Vlc.LibCoreHandle">
+            <summary>
+            获取载入的 LibVlcCore 库句柄
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Vlc.LibDirectory">
+            <summary>
+            获取或设置载入 LibVlc 库时,提供的库的所在文件夹
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.Vlc.InstancePointer">
+            <summary>
+            获取 Vlc 实例的指针
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.LoadLibVlc(System.String)">
+            <summary>
+            提供指定的路径,载入 LibVlc
+            </summary>
+            <param name="libDirectory">LibVlc 库路径</param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.LoadLibVlc">
+            <summary>
+            使用已经设定好的路径,载入 LibVlc
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.Retain">
+            <summary>
+            递增引用计数,在使用 xZune.Vlc 时,一般是不需要调用此方法,引用计数是由 Vlc 类托管的
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.AddInterface(System.String)">
+            <summary>
+            尝试添加一个用户接口
+            </summary>
+            <param name="name">接口名,为 NULL 则为默认</param>
+            <returns>是否成功添加接口</returns>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.Wait">
+            <summary>
+            等待,直到一个接口导致实例退出为止,在使用之前,应该使用 <see cref="M:xZune.Vlc.Vlc.AddInterface(System.String)"/> 添加至少一个用户接口.
+            实际上这个方法只会导致线程阻塞
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.SetUserAgent(System.String,System.String)">
+            <summary>
+            设置一个用户代理字符串,当一个协议需要它的时候,将会提供该字符串
+            </summary>
+            <param name="name">应用程序名称,类似于 "FooBar player 1.2.3",实际上只要能标识应用程序,任何字符串都是可以的</param>
+            <param name="http">HTTP 用户代理,类似于 "FooBar/1.2.3 Python/2.6.0"</param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.SetAppId(System.String,System.String,System.String)">
+            <summary>
+            设置一些元信息关于该应用程序
+            </summary>
+            <param name="id">Java 风格的应用标识符,类似于 "com.acme.foobar"</param>
+            <param name="version">应用程序版本,类似于 "1.2.3"</param>
+            <param name="icon">应用程序图标,类似于 "foobar"</param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.GetVersion">
+            <summary>
+            获取 LibVlc 的版本信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.GetCompiler">
+            <summary>
+            获取 LibVlc 的编译器信息
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.GetChangeset">
+            <summary>
+            获取 LibVlc 的变更集(?)
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.Free(System.IntPtr)">
+            <summary>
+            释放由 LibVlc 函数返回的指针资源,其作用类似于 C语言 中的 free() 函数,在使用 xZune.Vlc 时,一般是不需要调用此方法,所有指针资源都是由 Vlc 类托管的
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.ReleaseModuleDescription(xZune.Vlc.ModuleDescription)">
+            <summary>
+            释放 <see cref="T:xZune.Vlc.ModuleDescription"/> 的资源,实际上我们更推荐使用 <see cref="M:xZune.Vlc.ModuleDescription.Dispose"/> 方法释放
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.GetAudioFilterList">
+            <summary>
+            获取可用的音频过滤器
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.GetVideoFilterList">
+            <summary>
+            获取可用的视频过滤器
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.CreateMediaAsNewNode(System.String)">
+            <summary>
+            通过名称创建一个新的 VlcMedia
+            </summary>
+            <param name="name">媒体名称</param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.CreateMediaFromFileDescriptor(System.Int32)">
+            <summary>
+            通过给定的文件描述符创建一个新的 VlcMedia
+            </summary>
+            <param name="fileDescriptor">文件描述符</param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.CreateMediaFromLocation(System.String)">
+            <summary>
+            通过给定的文件 Url 创建一个新的 VlcMedia,该 Url 的格式必须以 "file://" 开头,参见 "RFC3986".
+            </summary>
+            <param name="url">文件 Url</param>
+        </member>
+        <member name="M:xZune.Vlc.Vlc.CreateMediaFromPath(System.String)">
+            <summary>
+            通过给定的文件路径创建一个新的 VlcMedia
+            </summary>
+            <param name="path">文件路径</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcError.LoadLibVlc(System.IntPtr,System.Version,System.String)">
+            <summary>
+            载入 LibVlc 的 Error 模块,该方法会在 <see cref="M:xZune.Vlc.Vlc.LoadLibVlc"/> 中自动被调用
+            </summary>
+            <param name="libHandle"></param>
+            <param name="libVersion"></param>
+            <param name="devString"></param>
+        </member>
+        <member name="P:xZune.Vlc.VlcError.IsLibLoaded">
+            <summary>
+            获取一个值,该值指示当前模块是否被载入
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcError.GetErrorMessage">
+            <summary>
+            获取一个可读的 LibVlc 错误信息
+            </summary>
+            <returns>返回一个可读的 LibVlc 错误信息,如果没有错误信息将返回 NULL</returns>
+        </member>
+        <member name="M:xZune.Vlc.VlcError.CleanError">
+            <summary>
+            清除当前线程的 LibVlc 的错误信息
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcEventManager.LoadLibVlc(System.IntPtr,System.Version,System.String)">
+            <summary>
+            载入 LibVlc 的 Event 模块,该方法会在 <see cref="M:xZune.Vlc.Vlc.LoadLibVlc"/> 中自动被调用
+            </summary>
+            <param name="libHandle"></param>
+            <param name="libVersion"></param>
+            <param name="devString"></param>
+        </member>
+        <member name="P:xZune.Vlc.VlcEventManager.IsLibLoaded">
+            <summary>
+            获取一个值,该值指示当前模块是否被载入
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.LoadLibVlc(System.IntPtr,System.Version,System.String)">
+            <summary>
+            载入 LibVlc 的 Media 模块,该方法会在 <see cref="M:xZune.Vlc.Vlc.LoadLibVlc"/> 中自动被调用
+            </summary>
+            <param name="libHandle"></param>
+            <param name="libVersion"></param>
+            <param name="devString"></param>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.IsLibLoaded">
+            <summary>
+            获取一个值,该值指示当前模块是否被载入
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.InstancePointer">
+            <summary>
+            获取 Media 实例指针
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.CreateAsNewNode(xZune.Vlc.Vlc,System.String)">
+            <summary>
+            通过名称创建一个新的 VlcMedia
+            </summary>
+            <param name="vlc">Vlc 对象</param>
+            <param name="name">媒体名称</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.CreateFormFileDescriptor(xZune.Vlc.Vlc,System.Int32)">
+            <summary>
+            通过给定的文件描述符创建一个新的 VlcMedia
+            </summary>
+            <param name="vlc">Vlc 对象</param>
+            <param name="fileDescriptor">文件描述符</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.CreateFormLocation(xZune.Vlc.Vlc,System.String)">
+            <summary>
+            通过给定的文件 Url 创建一个新的 VlcMedia,该 Url 的格式必须以 "file://" 开头,参见 "RFC3986".
+            </summary>
+            <param name="vlc">Vlc 对象</param>
+            <param name="url">文件 Url</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.CreateFormPath(xZune.Vlc.Vlc,System.String)">
+            <summary>
+            通过给定的文件路径创建一个新的 VlcMedia
+            </summary>
+            <param name="vlc">Vlc 对象</param>
+            <param name="path">文件路径</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.AddOption(System.String[])">
+            <summary>
+            向一个媒体添加选项,这个选项将会确定媒体播放器将如何读取介质,
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.AddOptionFlag(System.String,xZune.Vlc.Interop.Media.MediaOption)">
+            <summary>
+            向一个媒体通过可配置的标志添加一个选项,这个选项将会确定媒体播放器将如何读取介质,
+            </summary>
+            <param name="options"></param>
+            <param name="flag"></param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.Duplicate">
+            <summary>
+            复制一个媒体对象
+            </summary>
+            <returns>复制的媒体对象</returns>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.GetCodecDescription(xZune.Vlc.Interop.Media.TrackType,System.Int32)">
+            <summary>
+            获取媒体的基本编码器的说明
+            </summary>
+            <param name="type">由 <see cref="P:xZune.Vlc.MediaTrack.Type"/> 得来</param>
+            <param name="codec">由 <see cref="P:xZune.Vlc.MediaTrack.Codec"/> 得来</param>
+            <returns>返回媒体的基本编码器的说明</returns>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.Duration">
+            <summary>
+            获取媒体的时间长度
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.GetMeta(xZune.Vlc.Interop.Media.MetaDataType)">
+            <summary>
+            获取媒体的某个元属性,如果尚未解析元属性,将会返回 NULL.
+            这个方法会自动调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMediaAsync"/> 方法,所以你在之后应该会收到一个 MediaMetaChanged 事件.
+            如果你喜欢同步版本,可以在 GetMeta 之前调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMedia"/> 方法
+            </summary>
+            <param name="type">元属性类型</param>
+            <returns>返回媒体的某个元属性</returns>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.Mrl">
+            <summary>
+            获取该媒体的媒体资源地址
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.State">
+            <summary>
+            获取媒体当前状态
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.Stats">
+            <summary>
+            获取媒体当前统计
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.GetTrackInfo">
+            <summary>
+            获取媒体的基本流的描述,注意,在调用该方法之前你需要首先调用 <see cref="T:xZune.Vlc.Interop.Media.ParseMedia"/> 方法,或者至少播放一次.
+            否则,你将的得到一个空数组
+            </summary>
+            <returns>一个 <see cref="T:xZune.Vlc.Interop.Media.MediaTrackInfo"/> 数组</returns>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.UserData">
+            <summary>
+            获取或设置由用户定义的媒体数据
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMedia.IsParsed">
+            <summary>
+            获取一个值表示该媒体是否已经解析
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.Parse">
+            <summary>
+            解析一个媒体,获取媒体的元数据和轨道信息
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.ParseAsync">
+            <summary>
+            异步解析一个媒体,获取媒体的元数据和轨道信息,这是 <see cref="M:xZune.Vlc.VlcMedia.Parse"/> 的异步版本,
+            解析完成会触发 <see cref="E:xZune.Vlc.VlcMedia.ParsedChanged"/> 事件,您可以跟踪该事件
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.ParseWithOptionAsync(xZune.Vlc.Interop.Media.MediaParseFlag)">
+            <summary>
+            根据提供的标志异步解析一个媒体,获取媒体的元数据和轨道信息,这是 <see cref="M:xZune.Vlc.VlcMedia.ParseAsync"/> 的高级版本,
+            默认情况下解析一个本地文件,解析完成会触发 <see cref="E:xZune.Vlc.VlcMedia.ParsedChanged"/> 事件,您可以跟踪该事件
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.RetainMedia">
+            <summary>
+            递增媒体对象的引用计数
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.SaveMeta">
+            <summary>
+            保存当前的元数据到媒体
+            </summary>
+            <returns>如果操作成功将会返回 True</returns>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.SetMeta(xZune.Vlc.Interop.Media.MetaDataType,System.String)">
+            <summary>
+            设置媒体的元数据
+            </summary>
+            <param name="type">元数据类型</param>
+            <param name="data">元数据值</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.GetTracks">
+            <summary>
+            获取媒体的基本流的描述,注意,在调用该方法之前你需要首先调用 <see cref="M:xZune.Vlc.VlcMedia.Parse"/> 方法,或者至少播放一次.
+            否则,你将的得到一个空数组
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMedia.Dispose">
+            <summary>
+            释放 VlcMedia 资源
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.LoadLibVlc(System.IntPtr,System.Version,System.String)">
+            <summary>
+            载入 LibVlc 的 MediaPlayer 模块,该方法会在 <see cref="M:xZune.Vlc.Vlc.LoadLibVlc"/> 中自动被调用
+            </summary>
+            <param name="libHandle"></param>
+            <param name="libVersion"></param>
+            <param name="devString"></param>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.IsLibLoaded">
+            <summary>
+            获取一个值,该值指示当前模块是否被载入
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.IsPlaying">
+            <summary>
+            获取一个值,该值表示 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 是否正在播放
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Position">
+            <summary>
+            获取或设置一个值,该值表示 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 的播放进度,范围为0.0~1.0
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Hwnd">
+            <summary>
+            获取或设置一个值,该值表示 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 通过GDI的方式,将视频渲染到指定的窗口句柄
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Length">
+            <summary>
+            获取一个值,该值表示 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 目前媒体的长度
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Time">
+            <summary>
+            获取或设置一个值,该值表示当前媒体播放进度
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Chapter">
+            <summary>
+            获取或设置一个值,该值表示当前 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 播放的章节
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.ChapterCount">
+            <summary>
+            获取一个值,该值表示媒体共有多少个章节
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.CanPlay">
+            <summary>
+            获取一个值,该值表示现在媒体是否可以进行播放
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Title">
+            <summary>
+            获取或设置一个值,该值表示 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 当前播放的标题
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Rate">
+            <summary>
+            获取或设置一个值,该值表示当前媒体的播放速率
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.State">
+            <summary>
+            获取一个值,该值示当前媒体状态
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Fps">
+            <summary>
+            获取一个值,该值表示当前媒体的FPS
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.HasVideoOutCount">
+            <summary>
+            获取一个值,该值表示当前拥有的视频输出数量
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.IsSeekable">
+            <summary>
+            获取一个值,该值表示当前媒体是否允许跳进度
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.CanPause">
+            <summary>
+            获取一个值,该值表示当前媒体是否允许暂停
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.Volume">
+            <summary>
+            获取或设置一个值,该值表示当前媒体音频的音量
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.IsMute">
+            <summary>
+            获取或设置一个值,该值表示当前媒体是否静音
+            </summary>
+        </member>
+        <member name="P:xZune.Vlc.VlcMediaPlayer.AudioOutputChannel">
+            <summary>
+            获取或设置一个值，该值表示音频输出通道
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.Play">
+            <summary>
+            使 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 开始播放
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.SetPause(System.Boolean)">
+            <summary>
+            设置 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 播放或者暂停
+            </summary>
+            <param name="pause">true 代表暂停,false 代表播放或继续</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.Pause">
+            <summary>
+            设置 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 为暂停
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.Resume">
+            <summary>
+            设置 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 为播放
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.PauseOrResume">
+            <summary>
+            当播放时设置 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 为暂停,反之为播放
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.Stop">
+            <summary>
+            设置 <see cref="T:xZune.Vlc.VlcMediaPlayer"/> 为停止
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.SetAudioFormat(System.String,System.UInt32,System.UInt32)">
+            <summary>
+            设置 Audio 的格式
+            </summary>
+            <param name="format">格式字符串,一个四字符的字符串</param>
+            <param name="rate">采样率</param>
+            <param name="channels">通道数</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.PreviousChapter">
+            <summary>
+            播放上一个章节
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.NextChapter">
+            <summary>
+            播放下一个章节
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.NextFrame">
+            <summary>
+            播放下一帧
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.SetVideoTitleDisplay(xZune.Vlc.Interop.MediaPlayer.Position,System.UInt32)">
+            <summary>
+            设置标题显示位置
+            </summary>
+            <param name="pos">位置</param>
+            <param name="timeout">显示时间</param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.ToggleMute">
+            <summary>
+            切换静音状态
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.GetMouseCursor(System.UInt32,System.Int32@,System.Int32@)">
+            <summary>
+            获取鼠标坐标
+            </summary>
+            <param name="num">视频输出号</param>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:xZune.Vlc.VlcMediaPlayer.Dispose">
+            <summary>
+            释放 VlcMedia 资源
+            </summary>
+        </member>
+        <member name="M:xZune.Vlc.Win32Api.LoadLibrary(System.String)">
+            <summary>
+            进程调用 LoadLibrary 以显式链接到 DLL,如果函数执行成功,它会将指定的 DLL 映射到调用进程的地址空间中并返回该 DLL 的句柄,此句柄可以与其他函数(如 GetProcAddress 和 FreeLibrary)一起在显式链接中使用
+            LoadLibrary 将尝试使用用于隐式链接的相同搜索序列来查找 DLL.如果系统无法找到所需的 DLL 或者入口点函数返回 FALSE.则 LoadLibrary 将抛出异常.如果对 LoadLibrary 的调用所指定的 DLL 模块已映射到调用进程的地址空间中,则该函数将返回该 DLL 的句柄并递增模块的引用数
+            </summary>
+            <param name="lpFileName">DLL 模块地址</param>
+            <returns>返回 DLL 模块句柄,如果出错将抛出异常</returns>
+        </member>
+        <member name="M:xZune.Vlc.Win32Api.GetProcAddress(System.IntPtr,System.String)">
+            <summary>
+            显式链接到 DLL 的进程调用 GetProcAddress 来获取 DLL 导出函数的地址,由于是通过指针调用 DLL 函数并且没有编译时类型检查,需确保函数的参数是正确的,以便不会超出在堆栈上分配的内存和不会导致访问冲突
+            </summary>
+            <param name="hModule">DLL 模块句柄</param>
+            <param name="lpProcName">调用的函数名</param>
+            <returns>返回函数地址</returns>
+        </member>
+        <member name="M:xZune.Vlc.Win32Api.FreeLibrary(System.IntPtr)">
+            <summary>
+            不再需要 DLL 模块时,显式链接到 DLL 的进程调用 FreeLibrary 函数.此函数递减模块的引用数,如果引用数为零,此函数便从进程的地址空间中取消模块的映射
+            </summary>
+            <param name="hModule">DLL 模块句柄</param>
+            <returns>如果成功会返回 true ,否则会返回 false,请通过 GetLastError 获取更多信息</returns>
+        </member>
+        <member name="M:xZune.Vlc.Win32Api.CreateFileMapping(System.IntPtr,System.IntPtr,xZune.Vlc.PageAccess,System.Int32,System.Int32,System.String)">
+            <summary>
+            创建一个新的文件映射内核对象
+            </summary>
+            <param name="hFile">指定欲在其中创建映射的一个文件句柄,为0xFFFFFFFF则表示创建一个内存文件映射</param>
+            <param name="lpAttributes">它指明返回的句柄是否可以被子进程所继承,使用 NULL 表示使用默认安全设置</param>
+            <param name="flProtect">指定文件映射对象的页面保护</param>
+            <param name="dwMaximumSizeHigh">表示映射文件大小的高32位</param>
+            <param name="dwMaximumSizeLow">表示映射文件大小的低32位</param>
+            <param name="lpName">指定文件映射对象的名字,如果为 NULL 则会创建一个无名称的文件映射对象</param>
+            <returns>返回文件映射对象指针,如果错误将返回 NULL,请通过 GetLastError 获取更多信息</returns>
+        </member>
+        <member name="M:xZune.Vlc.Win32Api.MapViewOfFile(System.IntPtr,xZune.Vlc.FileMapAccess,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            将一个文件映射对象映射到当前应用程序的地址空间
+            </summary>
+            <param name="hFileMappingObject">文件映射对象的句柄</param>
+            <param name="dwDesiredAccess">映射对象的文件数据的访问方式,而且同样要与 CreateFileMapping 函数所设置的保护属性相匹配</param>
+            <param name="dwFileOffsetHigh">表示文件映射起始偏移的高32位</param>
+            <param name="dwFileOffsetLow">表示文件映射起始偏移的低32位</param>
+            <param name="dwNumberOfBytesToMap">指定映射文件的字节数</param>
+            <returns>返回文件映射在内存中的起始地址,如果错误将返回 NULL,请通过 GetLastError 获取更多信息</returns>
+        </member>
+        <member name="M:xZune.Vlc.Win32Api.CloseHandle(System.IntPtr)">
+            <summary>
+            关闭一个内核对象.其中包括文件,文件映射,进程,线程,安全和同步对象等
+            </summary>
+            <param name="handle">欲关闭的一个对象的句柄</param>
+            <returns>如果成功会返回 true ,否则会返回 false,请通过 GetLastError 获取更多信息</returns>
+        </member>
+    </members>
+</doc>
