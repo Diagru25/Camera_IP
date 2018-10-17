@@ -9,7 +9,7 @@ $('.btn_delete').off('click').on('click', function () {
     var id = $(this).data('id');
 
     var result = confirm('Bạn có chắc chắn muốn xóa camera này');
-    if(result == true)
+    if (result == true)
     {
         $.ajax({
             url: '/Manage/Delete_camera',

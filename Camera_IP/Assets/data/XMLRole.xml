@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<Document>
+		<Role>
+			<Role_ID>1</Role_ID>
+			<Role_Name>Root</Role_Name>
+		</Role>
+		<Role>
+			<Role_ID>2</Role_ID>
+			<Role_Name>Admin</Role_Name>
+		</Role>
+	</Document>

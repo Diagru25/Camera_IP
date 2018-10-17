@@ -7,13 +7,11 @@ using System.IO;
 using System.Xml;
 using Camera_IP.Models;
 
+
 namespace Camera_IP.Controllers
 {
-    public class ManageController : Controller
+    public class ManageController : SecurityController
     {
-
-        static string path = @"C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\Assets\data\XMLFile1.xml";
-
         static List<camera> list = new List<camera>();
 
         // load file xml
@@ -22,10 +20,8 @@ namespace Camera_IP.Controllers
         // GET: Manage
         public ActionResult Index()
         {
-
             list.Clear();
-
-            xmlDoc.Load(path);
+            xmlDoc.Load(Common.CommonHelp.CameraPath);
             XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/document/camera");
 
 
@@ -40,21 +36,8 @@ namespace Camera_IP.Controllers
                 item.vitri = node.SelectSingleNode("vitri").InnerText;
                 item.loai = node.SelectSingleNode("loai").InnerText;
                 item.trangthai = node.SelectSingleNode("trangthai").InnerText;
+                item.duongdan = node.SelectSingleNode("duongdan").InnerText;
 
-                switch (item.loai)
-                {
-                    case "Panasonic":
-                        item.duongdan = "http://" + item.diachi_ip + "/nphMotionJpeg?Resolution=192x144&Quality=Standard";
-                        break;
-
-                    case "SmartPhone":
-                        item.duongdan = "http://" + item.diachi_ip + ":" + item.cong + "/video";
-                        break;
-
-                    case "Webcam": item.duongdan = "videoElement"; break; // đây là cái id của thẻ <video> show webcam
-
-                    default: item.duongdan = ""; break;
-                }
 
                 list.Add(item);
             }
@@ -67,12 +50,12 @@ namespace Camera_IP.Controllers
         }
 
         [HttpPost]
-        public JsonResult Add_abc_Camera(string ten, string diachi_ip, string cong, string vitri, string loai, string trangthai)
+        public JsonResult Add_abc_Camera(string ten, string diachi_ip, string cong, string vitri, string loai, string trangthai, string duongdan)
         {
             try
             {
 
-                xmlDoc.Load(path);
+                xmlDoc.Load(Common.CommonHelp.CameraPath);
 
                 XmlNode add_camera = xmlDoc.CreateNode(XmlNodeType.Element, "camera", null);
 
@@ -93,6 +76,8 @@ namespace Camera_IP.Controllers
                 _loai.InnerText = loai;
                 XmlNode _trangthai = xmlDoc.CreateElement("trangthai");
                 _trangthai.InnerText = trangthai;
+                XmlNode _duongdan = xmlDoc.CreateElement("duongdan");
+                _duongdan.InnerText = duongdan;
 
                 add_camera.AppendChild(_ID);
                 add_camera.AppendChild(_ten);
@@ -101,9 +86,10 @@ namespace Camera_IP.Controllers
                 add_camera.AppendChild(_vitri);
                 add_camera.AppendChild(_loai);
                 add_camera.AppendChild(_trangthai);
+                add_camera.AppendChild(_duongdan);
 
                 xmlDoc.DocumentElement.AppendChild(add_camera);
-                xmlDoc.Save(path);
+                xmlDoc.Save(Common.CommonHelp.CameraPath);
 
                 return Json(new
                 {
@@ -124,7 +110,7 @@ namespace Camera_IP.Controllers
         {
             camera item = new camera();
 
-            xmlDoc.Load(path);
+            xmlDoc.Load(Common.CommonHelp.CameraPath);
             XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/document/camera");
 
             foreach (XmlNode node in nodelist)
@@ -141,6 +127,7 @@ namespace Camera_IP.Controllers
                     item.vitri = node.SelectSingleNode("vitri").InnerText;
                     item.loai = node.SelectSingleNode("loai").InnerText;
                     item.trangthai = node.SelectSingleNode("trangthai").InnerText;
+                    item.duongdan = node.SelectSingleNode("duongdan").InnerText;
                     break;
                 }
             }
@@ -148,12 +135,12 @@ namespace Camera_IP.Controllers
         }
 
         [HttpPost]
-        public JsonResult Edit_abc_Camera(int id, string ten, string diachi_ip, string cong, string vitri, string loai, string trangthai)
+        public JsonResult Edit_abc_Camera(int id, string ten, string diachi_ip, string cong, string vitri, string loai, string trangthai, string duongdan)
         {
             try
             {
 
-                xmlDoc.Load(path);
+                xmlDoc.Load(Common.CommonHelp.CameraPath);
                 XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/document/camera");
 
                 foreach (XmlNode node in nodelist)
@@ -168,10 +155,11 @@ namespace Camera_IP.Controllers
                         node.SelectSingleNode("vitri").InnerText = vitri;
                         node.SelectSingleNode("loai").InnerText = loai;
                         node.SelectSingleNode("trangthai").InnerText = trangthai;
+                        node.SelectSingleNode("duongdan").InnerText = duongdan;
                         break;
                     }
                 }
-                xmlDoc.Save(path);
+                xmlDoc.Save(Common.CommonHelp.CameraPath);
 
                 return Json(new
                 {
@@ -191,17 +179,17 @@ namespace Camera_IP.Controllers
         {
             try
             {
-                xmlDoc.Load(path);
+                xmlDoc.Load(Common.CommonHelp.CameraPath);
                 XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/document/camera");
 
-                foreach(XmlNode item in nodelist)
+                foreach (XmlNode item in nodelist)
                 {
                     int id_temp = Convert.ToInt32(item.SelectSingleNode("ID").InnerText);
 
-                    if(id_temp == id)
+                    if (id_temp == id)
                     {
                         xmlDoc.SelectSingleNode("/document").RemoveChild(item);
-                        xmlDoc.Save(path);
+                        xmlDoc.Save(Common.CommonHelp.CameraPath);
                         break;
                     }
                 }

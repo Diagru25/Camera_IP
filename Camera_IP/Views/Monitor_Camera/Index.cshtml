@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layout.cshtml";
-    var number_camera = 8;
+    var number_camera = Model.Count;
 }
 
 @section jstest{
@@ -35,20 +35,31 @@
                 var id_box = "box" + Model.IndexOf(item).ToString();
                 var id_btn = "btn_box" + Model.IndexOf(item).ToString();
 
-                <div class="col-lg-4 hidenbox" id="@id_box">
+                <div class="col-lg-4 hidenbox" id="@id_box" data-url="@item.diachi_ip:@item.cong">
                     <div class="au-card" style="margin-bottom: 10px;">
                         <div>
-                            <h3 class="title-5 m-b-10">@item.ten<br><small>&nbsp @item.diachi_ip</small></h3>
+                            @if (item.loai == "Webcam")
+                            {
+                                <h3 class="title-5 m-b-10">@item.ten<small>&nbsp(@item.vitri)</small><br><span class="badge badge-pill badge-success">Online</span><small>&nbsp @item.diachi_ip</small></h3>
+                            }
+                            else if (item.loai == "Panasonic")
+                            {
+                                <h3 class="title-5 m-b-10">@item.ten<small>&nbsp(@item.vitri)</small><br><span class="badge badge-pill badge-success">Online</span><small>&nbsp @item.diachi_ip</small></h3>
+                            }
+                            else
+                            {
+                                <h3 class="title-5 m-b-10">@item.ten<small>&nbsp(@item.vitri)</small><br><span class="badge badge-pill cam_status" data-url="@item.diachi_ip:@item.cong"></span><small>&nbsp @item.diachi_ip</small></h3>
+                            }
                             <div>
 
                                 @switch (item.loai)
                                 {
-                                    case "Panasonic":   
-                                        <img class="img-responsive fixstyle" src="@item.duongdan" />
+                                    case "Panasonic":
+                                        <img class="img-responsive fixstyle"  src="@item.duongdan" />
                                         break;
 
                                     case "SmartPhone":
-                                        <img class="fixstyle" src="@item.duongdan" />
+                                        <img class="fixstyle" id="@item.diachi_ip:@item.cong" src="@item.duongdan" />
                                         break;
 
                                     case "Webcam":
@@ -65,7 +76,7 @@
                         </button>
                     </div>
                 </div>
-                }
+            }
         </div>
     </div>
 </div>
@@ -116,3 +127,48 @@
         </div>
     </div>
 </div>
+<script>
+    function urlExists(url, elm) {
+        $.ajax({
+            timeout: 1000,
+            type: 'GET',
+            dataType: 'jsonp',
+            url: "http://" + url,
+            cache: false,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                if (errorThrown == "timeout") {
+                    result.push({
+                        'url': url,
+                        'status': "woah, there we got a timeout..."
+                    });
+                    // At this point the request shall abort
+                }
+            },
+            statusCode: {
+                404: function () {
+                    $(elm).text('Offline');
+                    $(elm).addClass('badge-danger');
+                    document.getElementById(url).setAttribute('src', '/Assets/images/offline.gif');
+                },
+                0: function () {
+                    $(elm).text('Offline');
+                    $(elm).addClass('badge-danger');
+                    document.getElementById(url).setAttribute('src', '/Assets/images/offline.gif');
+                },
+                500: function () {
+                    $(elm).text('Offline');
+                    $(elm).addClass('badge-danger');
+                    document.getElementById(url).setAttribute('src', '/Assets/images/offline.gif');
+                },
+                200: function () {
+                    $(elm).text('Online');
+                    $(elm).addClass('badge-success');
+                }
+            }
+        });
+    }
+    var result = new Array;
+    $('span.cam_status').each(function () {
+        urlExists($(this).data('url'), $(this));
+    });
+</script>   

@@ -2,38 +2,62 @@
 <document>
   <camera>
     <ID>1</ID>
-    <ten>cam 1</ten>
-    <diachi_ip>192.168.45.0</diachi_ip>
+    <ten>Cam 1</ten>
+    <diachi_ip>192.168.45.12</diachi_ip>
     <cong>8080</cong>
-    <vitri>H2</vitri>
+    <vitri>Giảng đường H2</vitri>
     <loai>Webcam</loai>
     <trangthai>Online</trangthai>
+    <duongdan>videoElement</duongdan>
   </camera>
   <camera>
     <ID>2</ID>
-    <ten>23</ten>
+    <ten>Cam 2</ten>
     <diachi_ip>192.168.52.30</diachi_ip>
     <cong>8080</cong>
-    <vitri>G5</vitri>
+    <vitri>Cổng chính</vitri>
     <loai>SmartPhone</loai>
     <trangthai>Online</trangthai>
-  </camera>
-  <camera>
-    <ID>3</ID>
-    <ten>cam 2</ten>
-    <diachi_ip>13.20.52.4</diachi_ip>
-    <cong>8080</cong>
-    <vitri>K0</vitri>
-    <loai>SmartPhone</loai>
-    <trangthai>Online</trangthai>
+    <duongdan>http://192.168.52.30:8080/video</duongdan>
   </camera>
   <camera>
     <ID>7</ID>
-    <ten>cam 7</ten>
-    <diachi_ip>12.12.12.254</diachi_ip>
-    <cong>9090</cong>
-    <vitri>GG5</vitri>
-    <loai>Panasonic</loai>
+    <ten>Cam 4</ten>
+    <diachi_ip>192.168.43.10</diachi_ip>
+    <cong>8080</cong>
+    <vitri>Giảng đường H3</vitri>
+    <loai>SmartPhone</loai>
     <trangthai>Online</trangthai>
+    <duongdan>http://192.168.43.10:8080/video</duongdan>
+  </camera>
+  <camera>
+    <ID>8</ID>
+    <ten>Cam 5</ten>
+    <diachi_ip>192.168.43.60</diachi_ip>
+    <cong>8080</cong>
+    <vitri>S11</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+    <duongdan>http://192.168.43.60:8080/video</duongdan>
+  </camera>
+  <camera>
+    <ID>10</ID>
+    <ten>Cam 8</ten>
+    <diachi_ip>192.168.43.166</diachi_ip>
+    <cong>8080</cong>
+    <vitri>H2</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+    <duongdan>http://192.168.43.166:8080/video</duongdan>
+  </camera>
+  <camera>
+    <ID>11</ID>
+    <ten>Cam 10</ten>
+    <diachi_ip>192.164.53.21</diachi_ip>
+    <cong>8080</cong>
+    <vitri>J4</vitri>
+    <loai>SmartPhone</loai>
+    <trangthai>Online</trangthai>
+    <duongdan>http://192.164.53.21:8080/video</duongdan>
   </camera>
 </document>

@@ -48,7 +48,7 @@ $('.btn_zoom_out').off('click').on('click', function () {
 
     if (src != 'videoElement')
     {
-        var html_camera = '<img style="width: 250px;" class="img-responsive" src="' + src + '" />';
+        var html_camera = '<img style="width: 100%;" class="img-responsive" src="' + src + '" />';
 
         $('#view_camera').append(html_camera);
     }

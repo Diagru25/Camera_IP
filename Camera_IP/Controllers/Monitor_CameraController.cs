@@ -9,9 +9,9 @@ using Camera_IP.Models;
 
 namespace Camera_IP.Controllers
 {
-    public class Monitor_CameraController : Controller
+    public class Monitor_CameraController : SecurityController
     {
-        string path = @"C:\Users\Diagr\OneDrive\Desktop\Git\Camera_IP\Camera_IP\Assets\data\XMLFile1.xml";
+        string path = Common.CommonHelp.CameraPath;
 
         // GET: Monitor_Camera
         public ActionResult Index()
