@@ -12,7 +12,10 @@ $(document).ready(function () {
     $('option[value="' + type + '"]').prop('selected', true);
 
     // xét giá trị cho đường dẫn khi khỏi tạo
-    Set_value_path_add();
+    if (Set_value_path_add() == false) {
+
+        Set_value_path_edit();
+    }
 })
 
 
@@ -90,7 +93,6 @@ $('#payment-button-add').off('click').on('click', function () {
             }
         })
     }
-
 })
 
 
@@ -103,13 +105,13 @@ $('#select_type_camera').change(function () {
 $('#select_type_camera_edit').change(function () {
     Set_value_path_edit();
 })
+
 // thay đổi địa chỉ ip
 $('#cc-exp').change(function () {
     if (Set_value_path_add() == false) {
        
         Set_value_path_edit();
-    }
-    
+    }   
 })
 
 //thay đổi cổng
@@ -133,6 +135,9 @@ function Set_value_path_add() {
     if (loai == "Webcam") {
         path = "videoElement";
     }
+    if (loai == "Panasonic") {
+        path += "http://" + diachi_ip + "/nphMotionJpeg?Resolution=192x144&Quality=Standard";
+    }
     $('#cc-number-path').val(path);
 
     if (loai == undefined)
@@ -152,6 +157,9 @@ function Set_value_path_edit() {
     }
     if (loai == "Webcam") {
         path = "videoElement";
+    }
+    if (loai == "Panasonic") {
+        path += "http://" + diachi_ip + "/nphMotionJpeg?Resolution=192x144&Quality=Standard";
     }
     $('#cc-number-path').val(path);
 }
